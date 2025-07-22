@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -19,21 +20,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-         parent::boot();
+    //      parent::boot();
 
-    $this->routes(function () {
-        Route::middleware('web')
-            ->group(base_path('routes/web.php'));
+    // $this->routes(function () {
+    //     Route::middleware('web')
+    //         ->group(base_path('routes/web.php'));
 
-        Route::middleware('api')
-            ->prefix('api')
-            ->group(base_path('routes/api.php'));
+    //     Route::middleware('api')
+    //         ->prefix('api')
+    //         ->group(base_path('routes/api.php'));
 
-        // ✅ Add this for admin routes
-        Route::middleware('web') // You can add 'auth' or custom middleware here too
-            ->prefix('admin')    // Optional: if you want all routes to start with /admin
-            ->name('admin.')     // Optional: name prefix (admin.dashboard, etc)
-            ->group(base_path('routes/admin.php'));
-    });
+    //     // ✅ Add this for admin routes
+    //     Route::middleware('web') // You can add 'auth' or custom middleware here too
+    //         ->prefix('admin')    // Optional: if you want all routes to start with /admin
+    //         ->name('admin.')     // Optional: name prefix (admin.dashboard, etc)
+    //         ->group(base_path('routes/admin.php'));
+    // });
     }
 }

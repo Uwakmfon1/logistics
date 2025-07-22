@@ -9,6 +9,12 @@
 <body>
     
     <h2>Welcome to the Admin Dashboard. This is a placeholder</h2>
+   
+    <form action="{{route('admin.logout')}}" method="POST">
+        @csrf
+        <input type="submit" value="logout" style="background: purple;color:white;font-size:30px;">
+        {{-- <a type="submit" style="background: purple;color:white;font-size:30px;">Logout</a> --}}
+    </form>
 
 </body>
 </html>

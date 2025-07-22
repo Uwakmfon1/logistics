@@ -16,6 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
+          if (!auth()->check() || !auth()->user()->is_admin) {
+            abort(403, 'Access denied. Admins only.');
+        }
+
+        return $next($request);
     }
 }

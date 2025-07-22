@@ -1,8 +1,12 @@
 <?php 
 namespace App\Services\Admin;
 
-use App\Http\Requests\Admin\LoginRequest;
+use App\Models\Admin;
 use Http\Facades\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\LoginRequest;
+use App\Http\Requests\Admin\ResetPasswordRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthService 
@@ -11,14 +15,17 @@ class AuthService
     {
         $validator = $request->validated();
         
-        if($validator->fails()){
-            return back()->withErrors([
-                'message'=>'Invalid Login Credentials'
-            ]);
+        $admin = Admin::where('email', $validator['email'])->first();
+        if (! $admin || ! Hash::check($validator['password'], $admin->password)) {
+           return redirect()->back()->with('error','Invalid login details');
         }
-        return view('admin.dashboard');
 
+        return view('admin.dashboard');
     }
 
-    // public function 
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+
+    }
 }
